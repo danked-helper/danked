@@ -3,15 +3,10 @@ import discord
 from discord.ext import commands, tasks
 import time
 import random
-import os
 import requests
 import json
-import platform
-from psutil import virtual_memory
-import base64
 
 client = commands.Bot(command_prefix='', self_bot=True)
-
 
 @client.event
 async def on_ready():
