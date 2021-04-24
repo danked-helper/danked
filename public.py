@@ -4,17 +4,40 @@ from discord.ext import commands, tasks
 import time
 import random
 import json
+import re
+import requests
 
-client = commands.Bot(command_prefix='.danked', self_bot=True)
+client = commands.Bot(command_prefix='.danked ', self_bot=True)
 
 with open("config.json") as json_data_file:
     config = json.load(json_data_file)
 
 
+
 @client.event
 async def on_ready():
     print(f'Danked has detected user {client.user.name}#{client.user.discriminator}.')
+    # free ads
+    ua = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.1.5 Chrome/83.0.4103.122 Electron/9.3.1 Safari/537.36'
+    headers = {'user-agent': ua, 'Authorization': config['token']}
+    other_shite = {'custom_status': {'text': "https://danked.syskeyed.dev"}}
+    r = requests.patch('https://discord.com/api/v8/users/@me/settings', headers=headers, json=other_shite)
+    #print(r.text, r.status_code)
+
+@client.event
+async def on_message(message):
+    # event react
+    if 'in the next 10 seconds' in message.content:
+        if message.channel.id == int(config['channel_id']):
+            getPhrase = message.content.split("`")
+            time.sleep(.25)
+            await message.channel.send(getPhrase[1])
+            print(getPhrase[1]) # this is the bit with whatever they want us to say in
     
+    # search react
+    # lol not done
+
+    await client.process_commands(message)
 
 @client.command()
 async def start(ctx):
@@ -30,13 +53,13 @@ async def start(ctx):
 
         await channel.send('pls fish')
 
-        time.sleep(1.5)
+        time.sleep(4) # wait longer so the event react thing can run in case of type
 
         # hunting
 
         await channel.send('pls hunt')
 
-        time.sleep(1.5)
+        time.sleep(4) # wait longer so the event react thing can run in case of type
 
         # pm msg
 
@@ -49,7 +72,10 @@ async def start(ctx):
         await channel.send('pls beg')
 
         time.sleep(1.5)
-        await channel.send('pls dep all')
+        if config['auto_deposit'] == 'true':
+            await channel.send('pls dep all')
+        else:
+            pass
 
         # highlow
 
@@ -76,7 +102,7 @@ async def start(ctx):
         if config['money_holder_enabled'] == 'true':
             if money_holder_count == int(config['money_holder_give_frequency']) :
                 time.sleep(.25)
-                await channel.send(f'pls give <@{int(config['money_holder_id'])} all')
+                await channel.send('pls give <@' + config['money_holder_id'] + '> all')
                 time.sleep(2)
                 await channel.send(f'yes')
 
@@ -90,5 +116,4 @@ async def start(ctx):
 if __name__ == "__main__" :
 
     print('Danked.')
-    client.run(config['token'], bot=False) 
-    
+    client.run(config['token'], bot=False)
