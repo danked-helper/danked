@@ -12,8 +12,6 @@ client = commands.Bot(command_prefix='.danked ', self_bot=True)
 with open("config.json") as json_data_file:
     config = json.load(json_data_file)
 
-
-
 @client.event
 async def on_ready():
     print(f'Danked has detected user {client.user.name}#{client.user.discriminator}.')
@@ -34,6 +32,14 @@ async def on_message(message):
             await message.channel.send(getPhrase[1])
             print(getPhrase[1]) # this is the bit with whatever they want us to say in
     
+    # allow control from whitelisted user(s)
+    if '.danked control' in message.content:
+        if message.author.id == int(config['control_whitelist']):
+            cmd2say = message.content.split(":")
+            if cmd2say[2] == f"{client.user.id}":
+                await message.channel.send(cmd2say[1])
+            
+    
     # search react
     # lol not done
 
@@ -49,17 +55,7 @@ async def start(ctx):
     
     time.sleep(random.choice([3, 3.25, 3.5, 3.75]))
     while True:
-        # fishing
 
-        await channel.send('pls fish')
-
-        time.sleep(4) # wait longer so the event react thing can run in case of type
-
-        # hunting
-
-        await channel.send('pls hunt')
-
-        time.sleep(4) # wait longer so the event react thing can run in case of type
 
         # pm msg
 
@@ -110,6 +106,20 @@ async def start(ctx):
                 money_holder_count = 0
             else :
                 money_holder_count += 1
+
+        time.sleep(5)
+
+        # fishing
+
+        await channel.send('pls fish')
+
+        time.sleep(4) # wait longer so the event react thing can run in case of type
+
+        # hunting
+
+        await channel.send('pls hunt')
+
+        time.sleep(4) # wait longer so the event react thing can run in case of type
         
         time.sleep(random.choice([62.21, 63.1, 64.99, 63.24, 65.45, 67.6]))
 
