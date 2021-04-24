@@ -3,76 +3,92 @@ import discord
 from discord.ext import commands, tasks
 import time
 import random
-import requests
 import json
 
-client = commands.Bot(command_prefix='', self_bot=True)
+client = commands.Bot(command_prefix='.danked', self_bot=True)
+
+with open("config.json") as json_data_file:
+    config = json.load(json_data_file)
+
 
 @client.event
 async def on_ready():
     print(f'Danked has detected user {client.user.name}#{client.user.discriminator}.')
     
 
-@client.event
-async def on_message(message):
-    if message.content.startswith('grind'):
-        await message.channel.send('Hey. Danked is now loading and will send messages in this channel.\nhaha syskeyed was here')
+@client.command()
+async def start(ctx):
+    channel = client.get_channel(int(config['channel_id']))
+    await channel.send('Hey. Danked is now loading. https://danked.syskeyed.dev/')
         # begging vars
-        pm_count = 0
-        #beg_count = 0
-        # wait
-        time.sleep(random.choice([3, 3.25, 3.5, 3.75]))
-        while True:
-            # fishing
+    pm_count = 0
+    money_holder_count = 0
+    
+    time.sleep(random.choice([3, 3.25, 3.5, 3.75]))
+    while True:
+        # fishing
 
-            await message.channel.send('pls fish')
+        await channel.send('pls fish')
 
-            time.sleep(1.5)
+        time.sleep(1.5)
 
-            # hunting
+        # hunting
 
-            await message.channel.send('pls hunt')
+        await channel.send('pls hunt')
 
-            time.sleep(1.5)
+        time.sleep(1.5)
 
-            # pm msg
+        # pm msg
 
-            await message.channel.send('pls postmeme')
-            time.sleep(1.55)
-            await message.channel.send(random.choice(['f', 'r', 'i', 'c', 'k']))
+        await channel.send('pls postmeme')
+        time.sleep(1.55)
+        await channel.send(random.choice(['f', 'r', 'i', 'c', 'k']))
 
-            # begging msg
+        # begging msg
 
-            await message.channel.send('pls beg')
+        await channel.send('pls beg')
 
-            time.sleep(1.5)
-            await message.channel.send('pls dep all')
+        time.sleep(1.5)
+        await channel.send('pls dep all')
 
-            # highlow
+        # highlow
 
-            await message.channel.send('pls highlow')
+        await channel.send('pls highlow')
+        time.sleep(2)
+        await channel.send(random.choice(['high', 'low']))
+
+        time.sleep(random.choice([1, 1.25, 1.5, 1.75]) + 4)
+
+        # auto buy laptop
+        if pm_count == int(config['laptop_buying_frequency']) :
+            time.sleep(.25)
+            await channel.send('pls withdraw 5000')
             time.sleep(2)
-            await message.channel.send(random.choice(['high', 'low']))
+            await channel.send('pls buy laptop')
 
-            time.sleep(random.choice([1, 1.25, 1.5, 1.75]) + 4)
+            pm_count = 0
+        else :
+            pm_count += 1
 
-            # auto buy laptop
-            if pm_count == 50 :
+        time.sleep(3.69)
+
+        # money holder
+        if config['money_holder_enabled'] == 'true':
+            if money_holder_count == int(config['money_holder_give_frequency']) :
                 time.sleep(.25)
-                await message.channel.send('pls withdraw 5000')
+                await channel.send(f'pls give <@{int(config['money_holder_id'])} all')
                 time.sleep(2)
-                await message.channel.send('pls buy laptop')
+                await channel.send(f'yes')
 
-                pm_count = 0
+                money_holder_count = 0
             else :
-                pm_count += 1
+                money_holder_count += 1
+        
+        time.sleep(random.choice([62.21, 63.1, 64.99, 63.24, 65.45, 67.6]))
 
-            time.sleep(random.choice([62.21, 63.1, 64.99, 63.24, 65.45, 67.6]))
-       
-if __name__ == "__main__" :  # we use this to run the script
+
+if __name__ == "__main__" :
 
     print('Danked.')
-    print('Commands: \'grind\' - starts the bot.')
-    tok = input('Enter your token here: ')
-    client.run(f'{tok}', bot=False) 
+    client.run(config['token'], bot=False) 
     
