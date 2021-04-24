@@ -101,6 +101,7 @@ async def start(ctx):
         # money holder
         if config['money_holder_enabled'] == 'true':
             if money_holder_count == int(config['money_holder_give_frequency']) :
+                await channel.send(f'pls with all')
                 time.sleep(.25)
                 await channel.send('pls give <@' + config['money_holder_id'] + '> all')
                 time.sleep(2)
