@@ -1,7 +1,7 @@
 # imports
 import discord
 from discord.ext import commands, tasks
-import time
+import asyncio
 import random
 import json
 import re
@@ -28,7 +28,7 @@ async def on_message(message):
     if 'in the next 10 seconds' in message.content:
         if message.channel.id == int(config['channel_id']):
             getPhrase = message.content.split("`")
-            time.sleep(.25)
+            asyncio.sleep(.25)
             await message.channel.send(getPhrase[1])
             print(getPhrase[1]) # this is the bit with whatever they want us to say in
     
@@ -53,21 +53,21 @@ async def start(ctx):
     pm_count = 0
     money_holder_count = 0
     
-    time.sleep(random.choice([3, 3.25, 3.5, 3.75]))
+    asyncio.sleep(random.choice([3, 3.25, 3.5, 3.75]))
     while True:
 
 
         # pm msg
 
         await channel.send('pls postmeme')
-        time.sleep(1.55)
+        asyncio.sleep(1.55)
         await channel.send(random.choice(['f', 'r', 'i', 'c', 'k']))
 
         # begging msg
 
         await channel.send('pls beg')
 
-        time.sleep(1.5)
+        asyncio.sleep(1.5)
         if config['auto_deposit'] == 'true':
             await channel.send('pls dep all')
         else:
@@ -76,55 +76,55 @@ async def start(ctx):
         # highlow
 
         await channel.send('pls highlow')
-        time.sleep(2)
+        asyncio.sleep(2)
         await channel.send(random.choice(['high', 'low']))
 
-        time.sleep(random.choice([1, 1.25, 1.5, 1.75]) + 4)
+        asyncio.sleep(random.choice([1, 1.25, 1.5, 1.75]) + 4)
 
         # auto buy laptop
         if pm_count == int(config['laptop_buying_frequency']) :
-            time.sleep(.25)
+            asyncio.sleep(.25)
             await channel.send('pls withdraw 5000')
-            time.sleep(2)
+            asyncio.sleep(2)
             await channel.send('pls buy laptop')
 
             pm_count = 0
         else :
             pm_count += 1
 
-        time.sleep(3.69)
+        asyncio.sleep(3.69)
 
         # money holder
         if config['money_holder_enabled'] == 'true':
             if money_holder_count == int(config['money_holder_give_frequency']) :
                 await channel.send(f'pls with all')
-                time.sleep(.25)
+                asyncio.sleep(.25)
                 await channel.send('pls give <@' + config['money_holder_id'] + '> all')
-                time.sleep(2)
+                asyncio.sleep(2)
                 await channel.send(f'yes')
 
                 money_holder_count = 0
             else :
                 money_holder_count += 1
 
-        time.sleep(5)
+        asyncio.sleep(5)
 
         # fishing
 
         await channel.send('pls fish')
 
-        time.sleep(4) # wait longer so the event react thing can run in case of type
+        asyncio.sleep(4) # wait longer so the event react thing can run in case of type
 
         # hunting
 
         await channel.send('pls hunt')
 
-        time.sleep(4) # wait longer so the event react thing can run in case of type
+        asyncio.sleep(4) # wait longer so the event react thing can run in case of type
         
-        time.sleep(random.choice([62.21, 63.1, 64.99, 63.24, 65.45, 67.6]))
+        asyncio.sleep(random.choice([62.21, 63.1, 64.99, 63.24, 65.45, 67.6]))
 
 
 if __name__ == "__main__" :
 
-    print('Danked.')
+    print('Danked by syskeyed | 2021')
     client.run(config['token'], bot=False)
