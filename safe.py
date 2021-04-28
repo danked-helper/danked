@@ -49,9 +49,14 @@ async def start(ctx):
     money_holder_count = 0
     
     await asyncio.sleep(random.choice([3, 3.25, 3.5, 3.75]))
+
+    async with ctx.typing():
+        type_time = random.uniform(0.5, 2)
+        await asyncio.sleep(type_time)            
+    await channel.send('pls settings confirmations false')
+
     while True:
 
-        
         # pm msg
         async with ctx.typing():
             type_time = random.uniform(0.5, 2)
@@ -134,12 +139,6 @@ async def start(ctx):
                     await asyncio.sleep(type_time)
                 await channel.send('pls give <@' + config['money_holder_id'] + '> all')
 
-                await asyncio.sleep(2)
-
-                async with ctx.typing():
-                    type_time = random.uniform(0.5, 1)
-                    await asyncio.sleep(type_time)
-                await channel.send(f'yes')
 
                 money_holder_count = 0
             else :
