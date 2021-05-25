@@ -12,6 +12,9 @@ client = commands.Bot(command_prefix='.danked ', self_bot=True)
 with open("config.json") as json_data_file:
     config = json.load(json_data_file)
 
+with open("auto-sell.json") as json_data_file2:
+    autosell = json.load(json_data_file2)
+
 @client.event
 async def on_ready():
     print(f'Danked has detected user {client.user.name}#{client.user.discriminator}.')
@@ -51,7 +54,7 @@ async def start(ctx):
     await asyncio.sleep(random.choice([3, 3.25, 3.5, 3.75]))
 
     async with ctx.typing():
-        type_time = random.uniform(0.5, 2)
+        type_time = random.uniform(0.5, 1)
         await asyncio.sleep(type_time)            
     await channel.send('pls settings confirmations false')
 
@@ -59,12 +62,12 @@ async def start(ctx):
 
         # pm msg
         async with ctx.typing():
-            type_time = random.uniform(0.5, 2)
+            type_time = random.uniform(0.5, 1)
             await asyncio.sleep(type_time)
         await channel.send('pls postmeme')
 
         async with ctx.typing():
-            type_time = random.uniform(0.5, 2)
+            type_time = random.uniform(0.5, .7)
             await asyncio.sleep(type_time)
         await channel.send(random.choice(['f', 'r', 'i', 'c', 'k']))
 
@@ -85,6 +88,8 @@ async def start(ctx):
             await channel.send('pls dep all')
         else:
             pass
+        
+        # auto sell
 
         # highlow
         async with ctx.typing():
@@ -92,20 +97,28 @@ async def start(ctx):
             await asyncio.sleep(type_time)
         await channel.send('pls highlow')
 
-        await asyncio.sleep(random.uniform(1,3))
+        await asyncio.sleep(random.uniform(.2, 1))
+
+        # pm msg
+        async with ctx.typing():
+            type_time = random.uniform(0.5, 1)
+            await asyncio.sleep(type_time)
+        await channel.send('pls dig')
+
+        await asyncio.sleep(random.uniform(.2, 1))
 
         async with ctx.typing():
-            type_time = random.uniform(0.5, 2)
+            type_time = random.uniform(0.5, 1)
             await asyncio.sleep(type_time)
         await channel.send(random.choice(['high', 'low']))
 
-        await asyncio.sleep(random.uniform(2,6))
+        await asyncio.sleep(random.uniform(1,3))
 
         # auto buy laptop
         if pm_count == int(config['laptop_buying_frequency']) :
             await asyncio.sleep(.25)
             async with ctx.typing():
-                type_time = random.uniform(0.5, 2)
+                type_time = random.uniform(0.5, 1)
                 await asyncio.sleep(type_time)
 
             await channel.send('pls withdraw 5000')
@@ -121,8 +134,10 @@ async def start(ctx):
             pm_count = 0
         else :
             pm_count += 1
+        # end auto laptop
 
-        await asyncio.sleep(3.69)
+
+        await asyncio.sleep(1.69)
 
         # money holder
         if config['money_holder_enabled'] == 'true':
@@ -162,7 +177,7 @@ async def start(ctx):
 
         await asyncio.sleep(random.uniform(4, 6)) # wait longer so the event react thing can run in case of type
         
-        await asyncio.sleep(random.uniform(63, 72))
+        await asyncio.sleep(random.uniform(45, 50))
 
 
 if __name__ == "__main__" :
