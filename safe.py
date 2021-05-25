@@ -51,7 +51,7 @@ async def start(ctx):
     pm_count = 0
     money_holder_count = 0
     
-    await asyncio.sleep(random.choice([3, 3.25, 3.5, 3.75]))
+    await asyncio.sleep(2)
 
     async with ctx.typing():
         type_time = random.uniform(0.5, 1)
@@ -99,13 +99,6 @@ async def start(ctx):
 
         await asyncio.sleep(random.uniform(.2, 1))
 
-        # pm msg
-        async with ctx.typing():
-            type_time = random.uniform(0.5, 1)
-            await asyncio.sleep(type_time)
-        await channel.send('pls dig')
-
-        await asyncio.sleep(random.uniform(.2, 1))
 
         async with ctx.typing():
             type_time = random.uniform(0.5, 1)
@@ -113,6 +106,14 @@ async def start(ctx):
         await channel.send(random.choice(['high', 'low']))
 
         await asyncio.sleep(random.uniform(1,3))
+
+        # pm msg
+        async with ctx.typing():
+            type_time = random.uniform(0.5, 1)
+            await asyncio.sleep(type_time)
+        await channel.send('pls dig')
+
+        await asyncio.sleep(random.uniform(.2, 1))
 
         # auto buy laptop
         if pm_count == int(config['laptop_buying_frequency']) :
