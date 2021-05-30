@@ -1,7 +1,7 @@
 {
     "channel_id" : "1234567890000",
     "token" : "replace_me",
-    "laptop_buying_frequency" : "50",
+    "laptop_buying_frequency" : "35",
     "money_holder_enabled" : "true",
     "money_holder_give_frequency" : "5",
     "money_holder_id" : "1234567890000",
