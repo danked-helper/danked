@@ -20,7 +20,7 @@ def force_msg(msg, channelid, token):
         "content":f"{msg}","nonce":"","tts":"false" # DONT SEND A NONCE I WASTED 4 HOURS ON THIS
     }
     send = requests.post(f"https://discord.com/api/v9/channels/{channelid}/messages", headers=headers, json=payload)
-    print(send.text)
+    #print(send.text)
 
 @listener.event
 async def on_ready():
@@ -33,32 +33,33 @@ async def on_message(message):
         if message.channel.id == int(config['channel_id']):
             getPhrase = message.content.split("`")
             force_msg(f'{getPhrase[1]}', str(config['channel_id']), str(config['token']))
-            #await message.channel.send(getPhrase[1])
-            #print(getPhrase[1])
+
     
     elif 'Quickly reverse the word' in message.content:
         if message.channel.id == int(config['channel_id']):
             getPhrase = message.content.split("`")[1]
             reversePhrase = str(getPhrase)[::-1]
             force_msg(f'{reversePhrase}', str(config['channel_id']), str(config['token']))
-            #await message.channel.send(reversePhrase)
-            #print(reversePhrase)
+
     
+    elif '**Laptop** is broken lmao' in message.content:
+        if message.channel.id == int(config['channel_id']):
+            force_msg('pls buy laptop', config['channel_id'], config['token'])
+
     # allow control from whitelisted user(s)
-    elif '.danked control' in message.content:
-        if message.author.id == int(config['control_whitelist']):
-            cmd2say = message.content.split(":")
-            if cmd2say[2] == f"{listener.user.id}":
-                await message.channel.send(cmd2say[1])
+    #elif '.danked control' in message.content:
+    #    if message.author.id == int(config['control_whitelist']):
+    #        cmd2say = message.content.split(":")
+    #        if cmd2say[2] == f"{listener.user.id}":
+    #            await message.channel.send(cmd2say[1])
 
     else: 
         pass
             
-    
     # search react
     # lol not done
 
     await listener.process_commands(message)
 
 
-listener.run('yo shit')
+listener.run(config['react_bot_token'])
