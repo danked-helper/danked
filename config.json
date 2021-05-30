@@ -7,5 +7,7 @@
     "money_holder_id" : "1234567890000",
     "auto_deposit" : "true",
     "control" : "true",
-    "control_whitelist" : "1234567890000"
+    "control_whitelist" : "1234567890000",
+    "auto_lifesaver_enabled" : "true",
+    "auto_lifesaver_frequency" : "10"
   }
