@@ -61,4 +61,4 @@ async def on_message(message):
     await listener.process_commands(message)
 
 
-listener.run('ODQ3ODgxMjI4MTU2NjY1ODc3.YLEg7Q.iYU-MRzOMU-64ZJUzdTDNK_nfFY')
+listener.run('yo shit')
