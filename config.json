@@ -1,13 +1,16 @@
 {
-    "channel_id" : "1234567890000",
-    "token" : "replace_me",
-    "laptop_buying_frequency" : "35",
-    "money_holder_enabled" : "true",
+
+    "channel_id" : "123456",
+    "token" : "token",
+    "react_bot_token" : "gotta be a bot token",
+    "money_holder_enabled" : "false",
     "money_holder_give_frequency" : "5",
     "money_holder_id" : "1234567890000",
     "auto_deposit" : "true",
-    "control" : "true",
+    "control" : "false",
     "control_whitelist" : "1234567890000",
-    "auto_lifesaver_enabled" : "true",
-    "auto_lifesaver_frequency" : "10"
-  }
+    "auto_lifesaver_enabled" : "false",
+    "auto_lifesaver_frequency" : "1"
+}
+
+
