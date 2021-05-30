@@ -1,3 +1,5 @@
-# danked
+# Danked
 
-# info at https://danked.syskeyed.dev
+## What is Danked?
+
+Danked is a selfbot for Dank Memer which automatically gains currency. 
