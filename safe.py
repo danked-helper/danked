@@ -50,6 +50,7 @@ async def start(ctx):
         # begging vars
     pm_count = 0
     money_holder_count = 0
+    auto_lifesaver_count = 0
     
     await asyncio.sleep(2)
 
@@ -160,7 +161,27 @@ async def start(ctx):
             else :
                 money_holder_count += 1
 
-        await asyncio.sleep(5)
+        await asyncio.sleep(1)
+
+        # auto lifesaver
+        if config['auto_lifesaver_enabled'] == 'true':
+            if auto_lifesaver_count == int(config['auto_lifesaver_frequency']) :
+                async with ctx.typing():
+                    type_time = random.uniform(0.5, 1)
+                    await asyncio.sleep(type_time)
+                await channel.send(f'pls use lifesaver')
+
+                #await asyncio.sleep(.25)
+
+                #async with ctx.typing():
+                #    type_time = random.uniform(0.5, 1)
+                #    await asyncio.sleep(type_time)
+                #await channel.send('pls give <@' + config['money_holder_id'] + '> all')
+
+
+                auto_lifesaver_count = 0
+            else :
+                auto_lifesaver_count += 1
 
         # fishing
         async with ctx.typing():
