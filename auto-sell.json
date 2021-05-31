@@ -1,0 +1,23 @@
+{
+    "alcohol" : "true",
+    "apple" : "true",
+    "boar" : "true",
+    "bread" : "true",
+    "cookie" : "true",
+    "deer" : "true",
+    "duck" : "true",
+    "exoticfish" : "true",
+    "fish" : "true",
+    "garbage" : "true",
+    "jellyfish" : "true",
+    "junk" : "true",
+    "padlock" : "true",
+    "rabbit" : "true",
+    "rarefish" : "true",
+    "sand" : "true",
+    "seaweed" : "true",
+    "skunk" : "true",
+    "spinner" : "true",
+    "tidepod" : "true",
+    "worm" : "true"
+  }
